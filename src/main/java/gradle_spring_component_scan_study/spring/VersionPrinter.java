@@ -1,5 +1,8 @@
 package gradle_spring_component_scan_study.spring;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class VersionPrinter {
 	
 	private int majorVersion;

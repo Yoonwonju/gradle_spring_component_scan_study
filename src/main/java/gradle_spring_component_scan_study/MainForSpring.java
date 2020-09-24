@@ -47,18 +47,18 @@ public class MainForSpring {
 			}else if(command.startsWith("info ")) {
 				processInfoCommand(command.split(" "));
 				continue;
-			}else if(command.equals("version ")) {
+			}else if(command.equals("version")) {
 				processVersionCommand();
 				continue;
 			}
+			printHelp();
 		}
 
-		printHelp();
-	}private static void processVersionCommand() {
+	}	private static void processVersionCommand() {
 		VersionPrinter versionPrinter = ctx.getBean("versionPrinter", VersionPrinter.class);
 		versionPrinter.print();
 	}
-private static void processInfoCommand(String[] arg) {
+	private static void processInfoCommand(String[] arg) {
 	if(arg.length !=2) {
 		printHelp();
 		return;
@@ -81,6 +81,7 @@ private static void processInfoCommand(String[] arg) {
 		System.out.println("new 이메일 이름 암호 암호확인");
 		System.out.println("change 이메일 현재비번 변경비번");
 		System.out.println("info 이메일");
+		System.out.println("version");
 		System.out.println();
 	}
 
@@ -89,7 +90,7 @@ private static void processInfoCommand(String[] arg) {
 			printHelp();
 			return;
 		}
-		MemberRegisterService regSvc = ctx.getBean("memberRegSvc", MemberRegisterService.class);
+		MemberRegisterService regSvc = ctx.getBean(MemberRegisterService.class);
 		RegisterRequest req = new RegisterRequest();
 		req.setEmail(arg[1]);
 		req.setName(arg[2]);
@@ -102,7 +103,7 @@ private static void processInfoCommand(String[] arg) {
 		}
 		try {
 			regSvc.regist(req);
-			System.out.println("등록했습니다.");
+			System.out.println("등록했습니다.\n");
 		}catch(DuplicateMemberException e){
 			System.out.println("이미 존재하는 이메일입니다.");
 		}
@@ -114,14 +115,14 @@ private static void processInfoCommand(String[] arg) {
 			printHelp();
 			return;
 		}
-		ChangePasswordService changePwdSvc= ctx.getBean("changePwdSvc", ChangePasswordService.class);
+		ChangePasswordService changePwdSvc= ctx.getBean(ChangePasswordService.class);
 		try {
 			changePwdSvc.changePassword(arg[1], arg[2], arg[3]);
-			System.out.println("암호를 변경했습니다.");
+			System.out.println("암호를 변경했습니다.\n");
 		}catch(MemberNotFoundException e) {
-			System.out.println("존재하지 않는 이메일입니다.");
+			System.out.println("존재하지 않는 이메일입니다.\n");
 		}catch(WrongIdPasswordException e) {
-			System.out.println("이메일과 암호가 일치하지 않습니다.");
+			System.out.println("이메일과 암호가 일치하지 않습니다.\n");
 		}
 	}
 

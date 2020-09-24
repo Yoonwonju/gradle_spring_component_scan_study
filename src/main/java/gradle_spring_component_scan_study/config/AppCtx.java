@@ -17,7 +17,19 @@ import gradle_spring_component_scan_study.spring.MemberSummaryPrinter;
 import gradle_spring_component_scan_study.spring.VersionPrinter;
 
 @Configuration			//해당 클래스를 스프링 설정 클래스로 지정한다.
+
 @ComponentScan(basePackages = {"gradle_spring_component_scan_study.spring"})
+
+//@ComponentScan(basePackages = {"gradle_spring_component_scan_study.spring"},
+//excludeFilters = @Filter(type = FilterType.REGEX,
+//pattern = "gradle_spring_component_scan_study.spring\\..*Dao")
+//		)
+
+//@ComponentScan(basePackages = {"gradle_spring_component_scan_study.spring"},
+//excludeFilters = @Filter(type = FilterType.ASPECTJ,
+//pattern = "gradle_spring_component_scan_study.spring.*Dao")
+//		)
+
 
 public class AppCtx {
 	
