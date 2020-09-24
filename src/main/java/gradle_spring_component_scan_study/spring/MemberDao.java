@@ -4,6 +4,9 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.stereotype.Component;
+
+@Component			// @Component는 클래스에 붙인다.
 public class MemberDao {
 	private static long nextId = 0;
 	

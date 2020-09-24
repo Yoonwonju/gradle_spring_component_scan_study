@@ -17,9 +17,17 @@ import gradle_spring_component_scan_study.spring.MemberSummaryPrinter;
 import gradle_spring_component_scan_study.spring.VersionPrinter;
 
 @Configuration			//해당 클래스를 스프링 설정 클래스로 지정한다.
-@ComponentScan(basePackages = {"gradle_spring_component_scan_study.spring"})
-
-public class AppCtx {
+//@ComponentScan(basePackages = {"gradle_spring_component_scan_study.spring"},
+//				excludeFilters = @Filter(type = FilterType.REGEX,
+//										pattern = "gradle_spring_component_scan_study.spring\\..*Dao"
+//						)
+//		)
+@ComponentScan(basePackages = {"gradle_spring_component_scan_study.spring"},
+				excludeFilters = @Filter(type = FilterType.ASPECTJ,
+										pattern = "gradle_spring_component_scan_study.spring.*Dao"
+						)
+		)
+public class AppCtxWithExclude {
 	
 	@Bean
 	@Qualifier("printer")
@@ -39,20 +47,20 @@ public class AppCtx {
 //	}
 	
 	
-//	// 직접주입 하드코딩함
-//	@Bean
-//	public MemberRegisterService memberRegSvc() {
-////		return new MemberRegisterService(memberDao());
-//		return new MemberRegisterService();
-//	}
-//	
-//	// @autowired 사용하여 자동주입 -> setter method 필요가없다
-//	@Bean
-//	public ChangePasswordService changePwdSvc() {
-//		ChangePasswordService pwdSvc = new ChangePasswordService();
-////		pwdSvc.setMemberDao(memberDao());		//자동주입되어 필요가없어요
-//		return pwdSvc;
-//	}
+	// 직접주입 하드코딩함
+	@Bean
+	public MemberRegisterService memberRegSvc() {
+//		return new MemberRegisterService(memberDao());
+		return new MemberRegisterService();
+	}
+	
+	// @autowired 사용하여 자동주입 -> setter method 필요가없다
+	@Bean
+	public ChangePasswordService changePwdSvc() {
+		ChangePasswordService pwdSvc = new ChangePasswordService();
+//		pwdSvc.setMemberDao(memberDao());		//자동주입되어 필요가없어요
+		return pwdSvc;
+	}
 	
 //	@Bean
 //	public MemberListPrinter listPrinter() {
